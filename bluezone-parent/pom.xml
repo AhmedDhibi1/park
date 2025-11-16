@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Parent POM for BlueZone projects -->
+	<groupId>io.github.proj.bluezone</groupId>
+	<artifactId>bluezone-parent</artifactId>
+	<version>1.0.0</version>
+
+	<packaging>pom</packaging>
+
+	<name>BlueZone Parent Project</name>
+
+	<properties>
+		<!-- Char encoding -->
+		<project.encoding>UTF-8</project.encoding>
+		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+		<!-- Java -->
+		<java.version>11</java.version>
+		<!-- Plugins -->
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<!-- Version of BlueZone projects -->
+		<bluezone.hexagon.version>1.0.0</bluezone.hexagon.version>
+		<bluezone.driver.forparkingcars.test.version>1.0.0</bluezone.driver.forparkingcars.test.version>
+		<bluezone.adapter.forparkingcars.webui.version>1.0.0</bluezone.adapter.forparkingcars.webui.version>
+		<bluezone.driver.forcheckingcars.test.version>1.0.0</bluezone.driver.forcheckingcars.test.version>
+		<bluezone.adapter.forobtainingrates.stub.version>1.0.0</bluezone.adapter.forobtainingrates.stub.version>
+		<bluezone.adapter.forstoringtickets.fake.version>1.0.0</bluezone.adapter.forstoringtickets.fake.version>
+		<bluezone.adapter.forpaying.spy.version>1.0.0</bluezone.adapter.forpaying.spy.version>
+		<!-- Version of external dependencies -->
+		<lib.javalangutils.version>1.1.0</lib.javalangutils.version>
+		<lib.portsadapters.version>1.1.0</lib.portsadapters.version>
+		<lombok.version>1.18.20</lombok.version>
+		<spring.boot.version>2.7.1</spring.boot.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Boot Dependencies without starter parent -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- My Java language Utils Library -->
+			<dependency>
+				<groupId>io.github.proj.lib.javalangutils</groupId>
+				<artifactId>lib-javalangutils</artifactId>
+				<version>${lib.javalangutils.version}</version>
+			</dependency>
+			<!-- My Ports And Adapters Pattern Library -->
+			<dependency>
+				<groupId>io.github.proj.lib.portsadapters</groupId>
+				<artifactId>lib-portsadapters</artifactId>
+				<version>${lib.portsadapters.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- BlueZone projects -->
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-hexagon</artifactId>
+				<version>${bluezone.hexagon.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-driver-forparkingcars-test</artifactId>
+				<version>${bluezone.driver.forparkingcars.test.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-adapter-forparkingcars-webui</artifactId>
+				<version>${bluezone.adapter.forparkingcars.webui.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-driver-forcheckingcars-test</artifactId>
+				<version>${bluezone.driver.forcheckingcars.test.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-adapter-forobtainingrates-stub</artifactId>
+				<version>${bluezone.adapter.forobtainingrates.stub.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-adapter-forstoringtickets-fake</artifactId>
+				<version>${bluezone.adapter.forstoringtickets.fake.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.proj.bluezone</groupId>
+				<artifactId>bluezone-adapter-forpaying-spy</artifactId>
+				<version>${bluezone.adapter.forpaying.spy.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<!-- Compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<verbose>false</verbose>
+					<optimize>true</optimize>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Repository with my own artifacts -->
+	<repositories>
+		<repository>
+			<id>github-repo</id>
+			<name>Github Repository</name>
+			<url>https://raw.githubusercontent.com/proj/proj.github.io/mavenrepo/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- Deploy the artifact to a project local repository -->
+	<distributionManagement>
+		<repository>
+			<id>local-repo</id>
+			<name>Local Repository</name>
+			<url>file://${project.build.directory}/localrepo</url>
+			<layout>default</layout>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+	</distributionManagement>
+
+</project>
