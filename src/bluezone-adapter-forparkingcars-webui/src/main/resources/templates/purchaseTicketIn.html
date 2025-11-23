@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html th:replace="~{mainlayout :: layout(~{::div})}" xmlns:th="http://www.thymeleaf.org">
+<div>
+        <h3>Park a car</h3>
+        <form th:action="@{/purchaseTicket}" th:object="${purchaseTicketRequest}" method="post">
+                <div class="form-group row pt-3">
+                        <div class="col text-end">
+                                <label for="inputCarPlate" class="form-label">Car Plate:</label>
+                        </div>
+                        <div class="col">
+                                <input type="text" id="inputCarPlate" th:field="*{carPlate}" placeholder="Enter a car plate ..."  class="form-control">
+                        </div>
+                </div>
+                <div class="form-group row pt-3">
+                        <div class="col text-end">
+                                <label for="selectRateName" class="form-label">Rate:</label>
+                        </div>
+                        <div class="col">
+                                <select id="selectRateName" th:field="*{rateName}" class="form-control">
+                                        <option value="">Select a rate ...</option>
+                                        <option th:each="rate : ${rates}" th:value="${rate.name}" th:text="${rate}"></option>
+                                </select>
+                        </div>
+                </div>
+                <div class="form-group row pt-3">
+                        <div class="col text-end">
+                                <label for="inputAmount" class="form-label">Amount (€):</label>
+                        </div>
+                        <div class="col">
+                                <input type="text" id="inputAmount" th:field="*{amount}" placeholder="Enter an amount in euros ..."  class="form-control">
+                        </div>
+                </div>
+                <div class="form-group row pt-3">
+                        <div class="col text-end">
+                                <label for="inputPaymentCard" class="form-label">Card Number:</label>
+                        </div>
+                        <div class="col">
+                                <input type="text" id="inputPaymentCard" th:field="*{paymentCard}" placeholder="Enter a cad number to pay with ..."  class="form-control">
+                        </div>
+                </div>
+                <div class="form-group row pt-3">
+                        <div class="col">
+                                <button type="submit" class="btn btn-dark">Purchase Ticket</button>
+                        </div>
+                </div>
+        </form>
+</div>
+</html>
